@@ -1,11 +1,12 @@
 import { createRoot } from "react-dom/client";
 import React from "react";
+import InfoFrame from "./components/InfoFrame";
 
 const app = (
   <>
     <div id="capture-frame"></div>
     <div id="comment-frame"></div>
-    <div id="presenter-frame"></div>
+    <InfoFrame />
   </>
 );
 

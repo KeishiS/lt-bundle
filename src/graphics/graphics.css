@@ -42,7 +42,7 @@ html {
   opacity: 0.1;
 }
 
-#presenter-frame {
+#info-frame {
   grid-row: 2 / 3;
   grid-column: 1 / 2;
   background-color: blue;
