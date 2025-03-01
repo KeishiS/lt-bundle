@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint ."
+    // "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "build:graphics": "vite build --config vite.graphics.config.ts"
   },
   "dependencies": {
     "react": "^19.0.0",
