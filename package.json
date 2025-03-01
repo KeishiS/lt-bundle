@@ -1,12 +1,22 @@
 {
   "name": "lt-bundle",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
-    // "build": "tsc -b && vite build",
     "lint": "eslint .",
     "build:graphics": "vite build --config vite.graphics.config.ts"
+  },
+  "nodecg": {
+    "compatibleRange": "^2.1.0",
+    "dashboardPanels": [],
+    "graphics": [
+      {
+        "file": "graphics.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "dependencies": {
     "react": "^19.0.0",

@@ -8,6 +8,7 @@ export default defineConfig({
   base: "./",
   build: {
     outDir: resolve(__dirname, "graphics"),
+    emptyOutDir: false,
     rollupOptions: {
       input: {
         graphics: resolve(__dirname, "./src/graphics/graphics.html"),
