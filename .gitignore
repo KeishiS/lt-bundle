@@ -27,3 +27,6 @@ dist-ssr
 /dashboard/
 /extension/
 /graphics/
+.env
+env.ts
+env.js
