@@ -24,6 +24,9 @@ module.exports = (nodecg: NodeCG.ServerAPI) => {
         const sender = info.sender_name;
         const content = info.message_content;
         console.log(`\t${sender}: ${content}`);
+
+        nodecg.sendMessage("receiveMessage", { sender, content });
+
         res.json({
           message: "OK",
           status: 200,
