@@ -7,10 +7,10 @@ const InfoFrame = () => {
   return (
     <div
       id="info-frame"
-      style={{ display: "flex", columnGap: "40px", alignItems: "center" }}
+      style={{ display: "flex", columnGap: "3rem", alignItems: "center" }}
     >
-      <div style={{ fontSize: "xx-large" }}>{name}</div>
-      <div style={{ fontSize: "xxx-large" }}>{title}</div>
+      <div style={{ fontSize: "2rem" }}>{name}</div>
+      <div style={{ fontSize: "3rem" }}>{title}</div>
     </div>
   );
 };
