@@ -6,11 +6,21 @@
   "scripts": {
     "lint": "eslint .",
     "build:graphics": "vite build --config vite.graphics.config.ts",
-    "build:extension": "vite build --config vite.extension.config.ts"
+    "build:extension": "vite build --config vite.extension.config.ts",
+    "build:dashboard": "vite build --config vite.dashboard.config.ts",
+    "build": "yarn build:graphics && yarn build:extension && yarn build:dashboard"
   },
   "nodecg": {
     "compatibleRange": "^2.1.0",
-    "dashboardPanels": [],
+    "dashboardPanels": [
+      {
+        "name": "lt-bundle",
+        "title": "LT Bundle",
+        "width": 5,
+        "file": "dashboard.html",
+        "headerColor": "#525F78"
+      }
+    ],
     "graphics": [
       {
         "file": "graphics.html",
