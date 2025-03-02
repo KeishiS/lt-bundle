@@ -6,6 +6,7 @@ const app = (
   <>
     <div id="capture-frame"></div>
     <div id="comment-frame"></div>
+    <div id="camera-frame"></div>
     <InfoFrame />
   </>
 );
