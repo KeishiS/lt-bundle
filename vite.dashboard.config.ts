@@ -2,15 +2,16 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  root: resolve(__dirname, "./src/dashboard"),
+  base: "./",
   build: {
-    outDir: ".",
+    outDir: resolve(__dirname, "dashboard"),
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        "graphics/graphics": resolve(__dirname, "src/graphics/graphics.html"),
+        dashboard: resolve(__dirname, "./src/dashboard/dashboard.html"),
       },
     },
   },

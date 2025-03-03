@@ -1,14 +1,36 @@
 {
   "name": "lt-bundle",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:graphics": "vite build --config vite.graphics.config.ts",
+    "build:extension": "vite build --config vite.extension.config.ts",
+    "build:dashboard": "vite build --config vite.dashboard.config.ts",
+    "build": "yarn build:graphics && yarn build:extension && yarn build:dashboard"
+  },
+  "nodecg": {
+    "compatibleRange": "^2.1.0",
+    "dashboardPanels": [
+      {
+        "name": "lt-bundle",
+        "title": "LT Bundle",
+        "width": 5,
+        "file": "dashboard.html",
+        "headerColor": "#525F78"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "graphics.html",
+        "width": 2560,
+        "height": 1440
+      }
+    ]
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -18,10 +40,12 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "daisyui": "^5.0.0",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
+    "nodecg": "^2.5.3",
     "tailwindcss": "^4.0.9",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",

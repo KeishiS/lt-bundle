@@ -24,6 +24,11 @@ dist-ssr
 *.sw?
 
 #
-dashboard
-extension
-graphics
+/dashboard/
+/extension/
+/graphics/
+.env
+env.ts
+env.js
+ltlist.json
+.log
