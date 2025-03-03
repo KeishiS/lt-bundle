@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import useReplicant from "../../hooks";
 
 const EventInfo = () => {
-  const [eventName, setEventname] = useState<string>("LT event #01");
+  const [eventName, setEventName] = useReplicant("eventName");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEventname(e.target.value);
+    setEventName(e.target.value);
   };
 
   const onClick = () => {
-    nodecg.sendMessage("updateEventName", { eventName });
+    nodecg.sendMessage("clearEventName");
   };
 
   return (
     <div>
+      <p>イベント名: {eventName}</p>
       <input placeholder={eventName} onChange={onChange} />
-      <button onClick={onClick}>更新</button>
+      <button onClick={onClick}>Clear</button>
     </div>
   );
 };

@@ -5,8 +5,55 @@ import {
   ParticipantLeftInfo,
   ChatMessage,
 } from "../zoomTypes";
+import { repDefaultValues, ZoomComment } from "../nodeCGTypes";
+import ltData from "../../ltlist.json";
 
 module.exports = (nodecg: NodeCG.ServerAPI) => {
+  const eventNameRep = nodecg.Replicant("eventName", {
+    defaultValue: repDefaultValues["eventName"],
+  });
+  nodecg.listenFor("clearEventName", () => {
+    eventNameRep.value = repDefaultValues["eventName"];
+  });
+
+  const ltListRep = nodecg.Replicant("ltList", {
+    defaultValue: repDefaultValues["ltList"],
+  });
+  const ltIdxRep = nodecg.Replicant("ltIdx", {
+    defaultValue: repDefaultValues["ltIdx"],
+  });
+  if (ltListRep.value.length <= ltIdxRep.value) {
+    ltIdxRep.value = 0;
+  }
+
+  nodecg.listenFor("nextIdx", () => {
+    const len = ltListRep.value.length;
+    const idx = Math.min(len - 1, ltIdxRep.value + 1);
+    ltIdxRep.value = idx;
+  });
+  nodecg.listenFor("prevIdx", () => {
+    const len = ltListRep.value.length;
+    const idx = Math.max(0, Math.min(len - 1, ltIdxRep.value - 1));
+    ltIdxRep.value = idx;
+  });
+  nodecg.listenFor("reloadJSON", () => {
+    const ltlist = ltData.presenters;
+    const idx = Math.min(ltIdxRep.value, ltlist.length - 1);
+    ltListRep.value = ltlist;
+    ltIdxRep.value = idx;
+  });
+
+  const commentsRep = nodecg.Replicant("comments", {
+    defaultValue: repDefaultValues["comments"],
+  });
+  nodecg.listenFor("addComment", (comment: ZoomComment) => {
+    commentsRep.value = [comment, ...commentsRep.value];
+  });
+  nodecg.listenFor("clearComments", () => {
+    commentsRep.value = repDefaultValues["comments"];
+  });
+
+  //-----------------------------------------------------------
   const router = nodecg.Router();
 
   router.post("/webhook", (req, res) => {
@@ -21,12 +68,12 @@ module.exports = (nodecg: NodeCG.ServerAPI) => {
     switch (req.body.event) {
       case "meeting.chat_message_sent": {
         const info: ChatMessage = req.body.payload.object.chat_message;
-        const sender = info.sender_name;
-        const content = info.message_content;
-        console.log(`\t${sender}: ${content}`);
+        const comment: ZoomComment = {
+          sender: info.sender_name,
+          content: info.message_content,
+        };
 
-        nodecg.sendMessage("receiveMessage", { sender, content });
-
+        nodecg.sendMessage("addComment", comment);
         res.json({
           message: "OK",
           status: 200,

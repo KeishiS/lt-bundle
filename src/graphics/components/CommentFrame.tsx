@@ -1,15 +1,8 @@
-import React, { useState } from "react";
-import { ZoomComment } from "../../nodeCGTypes";
+import React from "react";
+import useReplicant from "../../hooks";
 
 const CommentFrame = () => {
-  const init: ZoomComment[] = [
-    { sender: "主催者", content: "皆さんご参加ありがとうございます！" },
-  ];
-  const [comments, setComments] = useState(init);
-
-  nodecg.listenFor("receiveMessage", (data: ZoomComment) => {
-    setComments([...comments, { sender: data.sender, content: data.content }]);
-  });
+  const comments = useReplicant("comments")[0] ?? [];
 
   return (
     <div id="comment-frame">
@@ -20,8 +13,8 @@ const CommentFrame = () => {
         className="w-full grow flex flex-col comments-container"
         style={{ gap: "0.5rem" }}
       >
-        {comments.reverse().map((comment) => (
-          <div className="chat chat-start">
+        {comments.map((comment, id) => (
+          <div className="chat chat-start" key={id}>
             <div className="chat-header" style={{ fontSize: "0.7rem" }}>
               {comment.sender}
             </div>

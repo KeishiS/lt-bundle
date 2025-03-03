@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import useReplicant from "../../hooks";
 
 const EventFrame = () => {
-  const [eventName, setEventName] = useState("LT event #01");
-
-  nodecg.listenFor("updateEventName", (data: { eventName: string }) => {
-    setEventName(data.eventName);
-  });
+  const [eventName] = useReplicant("eventName");
 
   return (
     <div id="event-frame" className="flex justify-center items-center">
