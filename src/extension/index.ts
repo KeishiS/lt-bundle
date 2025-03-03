@@ -64,7 +64,6 @@ module.exports = (nodecg: NodeCG.ServerAPI) => {
       return;
     }
 
-    console.info(`\teventType: ${req.body.event}`);
     switch (req.body.event) {
       case "meeting.chat_message_sent": {
         const info: ChatMessage = req.body.payload.object.chat_message;
